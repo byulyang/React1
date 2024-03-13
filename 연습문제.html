@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"> </script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <h1 style="border : 2px solid black; background-color: black; color : white ; text-align: center;  ">오늘의 할일! 2024. 3. 13.</h1>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+       
+        
+        const {useState} = React;
+        
+        
+
+        function TodoList() {
+     
+     const [todos, setTodos] = useState([
+        {id: 1, todo: '일일 목록을 추가할 것'}
+     ]);
+
+     const [inputText, setInputText] = useState('');
+     const [nextTodo, setNextTodo] = useState(2);
+
+     const onChangeHandler = e => setInputText(e.target.value);
+
+     const onClickHandler= () => {
+        const changedTodos = todos.concat({
+            id : nextTodo,
+            todo: inputText
+        });
+
+        setNextTodo(nextid +1);
+        setTodos(changedTodos);
+        setInputText('');
+     }
+     const onRemove = id => {
+       
+           const changedTodos = todos.filter(todo => todo.id !== id);
+
+           setTodos(changedTodos);
+
+     }
+
+     const TodoList = todos.map(todo => <li key={todo.id} onDoubleClick={() => onRemove(todo.id)}>{todo.todo}</li>);
+
+     return (
+        <>
+        <input value={inputText} onChange={onChangeHandler}/>
+        <button onClick={onChangeHandler}>추가하기</button>
+        <ul>{TodoList}</ul>
+
+        </>
+    
+     );
+    
+    }
+
+     
+    ReactDOM.createRoot(document.getElementById('root')).render(<TodoList/>);
+    </script>
+  
+    
+</body>
+</html>
